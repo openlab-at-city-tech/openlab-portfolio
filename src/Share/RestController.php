@@ -63,7 +63,11 @@ class RestController {
 		}
 
 		if ( \get_current_user_id() !== (int) $comment->user_id ) {
-			return new WP_Error( 'rest_cannot_edit', 'Sorry, you are not allowed to edit this comment.', [ 'status' => \rest_authorization_required_code() ] );
+			return new WP_Error(
+				'rest_cannot_edit',
+				__( 'Sorry, you are not allowed to edit this comment.', 'openlab-portfolio' ),
+				[ 'status' => \rest_authorization_required_code() ]
+			);
 		}
 
 		return true;
@@ -82,7 +86,11 @@ class RestController {
 		}
 
 		if ( ! isset( $request['meta']['portfolio_post_id'] ) ) {
-			return new WP_Error( 'no_portfolio_post_id', 'Missing Portfolio post ID.', [ 'status' => 404 ] );
+			return new WP_Error(
+				'no_portfolio_post_id',
+				__( 'Missing Portfolio post ID.', 'openlab-portfolio' ),
+				[ 'status' => 404 ]
+			);
 		}
 
 		$meta = (int) $request['meta']['portfolio_post_id'];
@@ -98,7 +106,12 @@ class RestController {
 	 * @return WP_Comment|WP_Error Comment object if ID is valid, WP_Error otherwise.
 	 */
 	protected function get_comment( $id ) {
-		$error = new WP_Error( 'rest_comment_invalid_id', 'Invalid comment ID.', [ 'status' => 404 ] );
+		$error = new WP_Error(
+			'rest_comment_invalid_id',
+			__( 'Invalid comment ID.', 'openlab-portfolio' ),
+			[ 'status' => 404 ]
+		);
+
 		if ( (int) $id <= 0 ) {
 			return $error;
 		}
@@ -112,7 +125,11 @@ class RestController {
 		if ( ! empty( $comment->comment_post_ID ) ) {
 			$post = \get_post( (int) $comment->comment_post_ID );
 			if ( empty( $post ) ) {
-				return new WP_Error( 'rest_post_invalid_id', 'Invalid post ID.', [ 'status' => 404 ] );
+				return new WP_Error(
+					'rest_post_invalid_id',
+					__( 'Invalid post ID.', 'openlab-portfolio' ),
+					[ 'status' => 404 ]
+				);
 			}
 		}
 

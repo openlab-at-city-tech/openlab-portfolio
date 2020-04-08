@@ -1,10 +1,14 @@
 <?php
 /**
  * Plugin Name: OpenLab Portfolio
- * Description: OpneLab ePortolio feature.
- * Author: OpenLab
- * Version: 1.0.0
- * License: GPL-2.0-or-later
+ * Description: WordPress portfolio tools, developed for Commons In A Box and the City Tech OpenLab.
+ * Author:      OpenLab
+ * Author URI:  http://openlab.citytech.cuny.edu
+ * Plugin URI:  http://openlab.citytech.cuny.edu
+ * Version:     1.0.0
+ * License:     GPL-2.0-or-later
+ * Text Domain: openlab-portfolio
+ * Domain Path: /languages
  */
 
 namespace OpenLab\Portfolio;
