@@ -19,5 +19,9 @@ const ROOT_FILE = __FILE__;
 if ( file_exists( ROOT_DIR . '/vendor/autoload.php' ) ) {
 	require ROOT_DIR . '/vendor/autoload.php';
 
+	add_action( 'init', function() {
+		load_plugin_textdomain( 'openlab-portfolio' );
+	} );
+
 	Portfolio::create();
 }
