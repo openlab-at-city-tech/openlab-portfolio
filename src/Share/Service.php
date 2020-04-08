@@ -84,7 +84,7 @@ class Service implements Registerable {
 	 * @return void
 	 */
 	public function init() {
-		$type = openlab_get_site_type( get_current_blog_id() );
+		$type = cboxol_get_group_site_type( get_current_blog_id() );
 
 		switch ( $type ) {
 			case 'club':
@@ -333,7 +333,7 @@ class Service implements Registerable {
 	 * @return void
 	 */
 	public function meta_boxes( $post_type, $post ) {
-		$type = openlab_get_site_type( get_current_blog_id() );
+		$type = cboxol_get_group_site_type( get_current_blog_id() );
 
 		if ( 'portfolio' !== $type ) {
 			return;
