@@ -65,11 +65,17 @@ class ArchiveUpload {
 	 */
 	public function handle() {
 		if ( empty( $_FILES[ $this->form ]['name'] ) ) {
-			return new WP_Error( 'import.upload.handle', 'Please select an OpenLab Portfolio archive file.' );
+			return new WP_Error(
+				'import.upload.handle',
+				__( 'Please select an OpenLab Portfolio archive file.', 'openlab-portfolio' )
+			);
 		}
 
 		if ( ! $this->is_archive( pathinfo( $_FILES[ $this->form ]['name'] ) ) ) {
-			return new WP_Error( 'import.upload.handle', 'Incorrect format. Please choose an OpenLab Portfolio archive file.' );
+			return new WP_Error(
+				'import.upload.handle',
+				__( 'Incorrect format. Please choose an OpenLab Portfolio archive file.', 'openlab-portfolio' )
+			);
 		}
 
 		$overrides = [

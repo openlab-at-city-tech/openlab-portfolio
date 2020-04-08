@@ -183,7 +183,7 @@ class Importer {
 
 					if ( version_compare( $this->version, self::MAX_WXR_VERSION, '>' ) ) {
 						$this->logger->warning( sprintf(
-							__( 'This WXR file (version %s) is newer than the importer (version %s) and may not be supported. Please consider updating.', 'wordpress-importer' ),
+							__( 'This WXR file (version %s) is newer than the importer (version %s) and may not be supported. Please consider updating.', 'openlab-portfolio' ),
 							$this->version,
 							self::MAX_WXR_VERSION
 						) );
@@ -257,7 +257,7 @@ class Importer {
 
 					if ( version_compare( $this->version, self::MAX_WXR_VERSION, '>' ) ) {
 						$this->logger->warning( sprintf(
-							__( 'This WXR file (version %s) is newer than the importer (version %s) and may not be supported. Please consider updating.', 'wordpress-importer' ),
+							__( 'This WXR file (version %s) is newer than the importer (version %s) and may not be supported. Please consider updating.', 'openlab-portfolio' ),
 							$this->version,
 							self::MAX_WXR_VERSION
 						) );
@@ -416,7 +416,7 @@ class Importer {
 	 */
 	protected function import_start( $file ) {
 		if ( ! is_file( $file ) ) {
-			return new WP_Error( 'wxr_importer.file_missing', __( 'The file does not exist, please try again.', 'wordpress-importer' ) );
+			return new WP_Error( 'wxr_importer.file_missing', __( 'The file does not exist, please try again.', 'openlab-portfolio' ) );
 		}
 
 		// Suspend bunches of stuff in WP core
@@ -476,7 +476,7 @@ class Importer {
 	public function set_user_mapping( $mapping ) {
 		foreach ( $mapping as $map ) {
 			if ( empty( $map['old_slug'] ) || empty( $map['old_id'] ) || empty( $map['new_id'] ) ) {
-				$this->logger->warning( __( 'Invalid author mapping', 'wordpress-importer' ) );
+				$this->logger->warning( __( 'Invalid author mapping', 'openlab-portfolio' ) );
 				$this->logger->debug( var_export( $map, true ) );
 				continue;
 			}
@@ -664,7 +664,7 @@ class Importer {
 		// Is this type even valid?
 		if ( ! $post_type_object ) {
 			$this->logger->warning( sprintf(
-				__( 'Failed to import "%s": Invalid post type %s', 'wordpress-importer' ),
+				__( 'Failed to import "%s": Invalid post type %s', 'openlab-portfolio' ),
 				$data['post_title'],
 				$data['post_type']
 			) );
@@ -674,7 +674,7 @@ class Importer {
 		$post_exists = $this->post_exists( $data );
 		if ( $post_exists ) {
 			$this->logger->info( sprintf(
-				__( '%s "%s" already exists.', 'wordpress-importer' ),
+				__( '%s "%s" already exists.', 'openlab-portfolio' ),
 				$post_type_object->labels->singular_name,
 				$data['post_title']
 			) );
@@ -756,7 +756,7 @@ class Importer {
 		if ( 'attachment' === $postdata['post_type'] ) {
 			if ( ! $this->options['fetch_attachments'] ) {
 				$this->logger->notice( sprintf(
-					__( 'Skipping attachment "%s", fetching attachments disabled' ),
+					__( 'Skipping attachment "%s", fetching attachments disabled', 'openlab-portfolio' ),
 					$data['post_title']
 				) );
 				/**
@@ -777,7 +777,7 @@ class Importer {
 
 		if ( is_wp_error( $post_id ) ) {
 			$this->logger->error( sprintf(
-				__( 'Failed to import "%s" (%s)', 'wordpress-importer' ),
+				__( 'Failed to import "%s" (%s)', 'openlab-portfolio' ),
 				$data['post_title'],
 				$post_type_object->labels->singular_name
 			) );
@@ -809,12 +809,12 @@ class Importer {
 		$this->mark_post_exists( $data, $post_id );
 
 		$this->logger->info( sprintf(
-			__( 'Imported "%s" (%s)', 'wordpress-importer' ),
+			__( 'Imported "%s" (%s)', 'openlab-portfolio' ),
 			$data['post_title'],
 			$post_type_object->labels->singular_name
 		) );
 		$this->logger->debug( sprintf(
-			__( 'Post %d remapped to %d', 'wordpress-importer' ),
+			__( 'Post %d remapped to %d', 'openlab-portfolio' ),
 			$original_id,
 			$post_id
 		) );
@@ -877,7 +877,7 @@ class Importer {
 		$original_object_id = get_post_meta( $post_id, '_menu_item_object_id', true );
 		$object_id = null;
 
-		$this->logger->debug( sprintf( 'Processing menu item %s', $item_type ) );
+		$this->logger->debug( sprintf( __( 'Processing menu item %s', 'openlab-portfolio' ), $item_type ) );
 
 		$requires_remapping = false;
 		switch ( $item_type ) {
@@ -920,7 +920,7 @@ class Importer {
 			return;
 		}
 
-		$this->logger->debug( sprintf( 'Menu item %d mapped to %d', $original_object_id, $object_id ) );
+		$this->logger->debug( sprintf( __( 'Menu item %d mapped to %d', 'openlab-portfolio' ), $original_object_id, $object_id ) );
 		update_post_meta( $post_id, '_menu_item_object_id', wp_slash( $object_id ) );
 	}
 
@@ -962,7 +962,7 @@ class Importer {
 
 		$info = wp_check_filetype( $upload['file'] );
 		if ( ! $info ) {
-			return new WP_Error( 'attachment_processing_error', __( 'Invalid file type', 'wordpress-importer' ) );
+			return new WP_Error( 'attachment_processing_error', __( 'Invalid file type', 'openlab-portfolio' ) );
 		}
 
 		$post['post_mime_type'] = $info['type'];
@@ -1473,7 +1473,7 @@ class Importer {
 		$user_id = wp_insert_user( wp_slash( $userdata ) );
 		if ( is_wp_error( $user_id ) ) {
 			$this->logger->error( sprintf(
-				__( 'Failed to import user "%s"', 'wordpress-importer' ),
+				__( 'Failed to import user "%s"', 'openlab-portfolio' ),
 				$userdata['user_login']
 			) );
 			$this->logger->debug( $user_id->get_error_message() );
@@ -1494,11 +1494,11 @@ class Importer {
 		$this->mapping['user_slug'][ $original_slug ] = $user_id;
 
 		$this->logger->info( sprintf(
-			__( 'Imported user "%s"', 'wordpress-importer' ),
+			__( 'Imported user "%s"', 'openlab-portfolio' ),
 			$userdata['user_login']
 		) );
 		$this->logger->debug( sprintf(
-			__( 'User %d remapped to %d', 'wordpress-importer' ),
+			__( 'User %d remapped to %d', 'openlab-portfolio' ),
 			$original_id,
 			$user_id
 		) );
@@ -1625,22 +1625,6 @@ class Importer {
 			'description' => true,
 		);
 
-		// Map the parent comment, or mark it as one we need to fix
-		// TODO: add parent mapping and remapping
-		/*$requires_remapping = false;
-		if ( $parent_id ) {
-			if ( isset( $this->mapping['term'][ $parent_id ] ) ) {
-				$data['parent'] = $this->mapping['term'][ $parent_id ];
-			} else {
-				// Prepare for remapping later
-				$meta[] = array( 'key' => '_wxr_import_parent', 'value' => $parent_id );
-				$requires_remapping = true;
-
-				// Wipe the parent for now
-				$data['parent'] = 0;
-			}
-		}*/
-
 		foreach ( $data as $key => $value ) {
 			if ( ! isset( $allowed[ $key ] ) ) {
 				continue;
@@ -1652,7 +1636,7 @@ class Importer {
 		$result = wp_insert_term( $data['name'], $data['taxonomy'], $termdata );
 		if ( is_wp_error( $result ) ) {
 			$this->logger->warning( sprintf(
-				__( 'Failed to import %s %s', 'wordpress-importer' ),
+				__( 'Failed to import %s %s', 'openlab-portfolio' ),
 				$data['taxonomy'],
 				$data['name']
 			) );
@@ -1676,12 +1660,12 @@ class Importer {
 		$this->mapping['term_id'][ $original_id ] = $term_id;
 
 		$this->logger->info( sprintf(
-			__( 'Imported "%s" (%s)', 'wordpress-importer' ),
+			__( 'Imported "%s" (%s)', 'openlab-portfolio' ),
 			$data['name'],
 			$data['taxonomy']
 		) );
 		$this->logger->debug( sprintf(
-			__( 'Term %d remapped to %d', 'wordpress-importer' ),
+			__( 'Term %d remapped to %d', 'openlab-portfolio' ),
 			$original_id,
 			$term_id
 		) );
@@ -1722,7 +1706,10 @@ class Importer {
 
 		if ( ! empty( $max_size ) && $filesize > $max_size ) {
 			unlink( $upload['file'] );
-			$message = sprintf( 'Local file is too large, limit is %s', size_format( $max_size ) );
+			$message = sprintf(
+				__( 'Local file is too large, limit is %s', 'openlab-portfolio' ),
+				size_format( $max_size )
+			);
 			return new WP_Error( 'import_file_error', $message );
 		}
 
@@ -1760,7 +1747,7 @@ class Importer {
 			$this->logger->debug( sprintf(
 				// Note: title intentionally not used to skip extra processing
 				// for when debug logging is off
-				__( 'Running post-processing for post %d', 'wordpress-importer' ),
+				__( 'Running post-processing for post %d', 'openlab-portfolio' ),
 				$post_id
 			) );
 
@@ -1773,12 +1760,12 @@ class Importer {
 					$data['post_parent'] = $this->mapping['post'][ $parent_id ];
 				} else {
 					$this->logger->warning( sprintf(
-						__( 'Could not find the post parent for "%s" (post #%d)', 'wordpress-importer' ),
+						__( 'Could not find the post parent for "%s" (post #%d)', 'openlab-portfolio' ),
 						get_the_title( $post_id ),
 						$post_id
 					) );
 					$this->logger->debug( sprintf(
-						__( 'Post %d was imported with parent %d, but could not be found', 'wordpress-importer' ),
+						__( 'Post %d was imported with parent %d, but could not be found', 'openlab-portfolio' ),
 						$post_id,
 						$parent_id
 					) );
@@ -1792,12 +1779,12 @@ class Importer {
 					$data['post_author'] = $this->mapping['user_slug'][ $author_slug ];
 				} else {
 					$this->logger->warning( sprintf(
-						__( 'Could not find the author for "%s" (post #%d)', 'wordpress-importer' ),
+						__( 'Could not find the author for "%s" (post #%d)', 'openlab-portfolio' ),
 						get_the_title( $post_id ),
 						$post_id
 					) );
 					$this->logger->debug( sprintf(
-						__( 'Post %d was imported with author "%s", but could not be found', 'wordpress-importer' ),
+						__( 'Post %d was imported with author "%s", but could not be found', 'openlab-portfolio' ),
 						$post_id,
 						$author_slug
 					) );
@@ -1823,7 +1810,7 @@ class Importer {
 			// Do we have updates to make?
 			if ( empty( $data ) ) {
 				$this->logger->debug( sprintf(
-					__( 'Post %d was marked for post-processing, but none was required.', 'wordpress-importer' ),
+					__( 'Post %d was marked for post-processing, but none was required.', 'openlab-portfolio' ),
 					$post_id
 				) );
 				continue;
@@ -1834,7 +1821,7 @@ class Importer {
 			$result = wp_update_post( $data, true );
 			if ( is_wp_error( $result ) ) {
 				$this->logger->warning( sprintf(
-					__( 'Could not update "%s" (post #%d) with mapped data', 'wordpress-importer' ),
+					__( 'Could not update "%s" (post #%d) with mapped data', 'openlab-portfolio' ),
 					get_the_title( $post_id ),
 					$post_id
 				) );
@@ -1879,12 +1866,12 @@ class Importer {
 			update_post_meta( $post_id, '_menu_item_object_id', wp_slash( $menu_object ) );
 		} else {
 			$this->logger->warning( sprintf(
-				__( 'Could not find the menu object for "%s" (post #%d)', 'wordpress-importer' ),
+				__( 'Could not find the menu object for "%s" (post #%d)', 'openlab-portfolio' ),
 				get_the_title( $post_id ),
 				$post_id
 			) );
 			$this->logger->debug( sprintf(
-				__( 'Post %d was imported with object "%d" of type "%s", but could not be found', 'wordpress-importer' ),
+				__( 'Post %d was imported with object "%d" of type "%s", but could not be found', 'openlab-portfolio' ),
 				$post_id,
 				$menu_object_id,
 				$menu_item_type
@@ -1906,11 +1893,11 @@ class Importer {
 					$data['comment_parent'] = $this->mapping['comment'][ $parent_id ];
 				} else {
 					$this->logger->warning( sprintf(
-						__( 'Could not find the comment parent for comment #%d', 'wordpress-importer' ),
+						__( 'Could not find the comment parent for comment #%d', 'openlab-portfolio' ),
 						$comment_id
 					) );
 					$this->logger->debug( sprintf(
-						__( 'Comment %d was imported with parent %d, but could not be found', 'wordpress-importer' ),
+						__( 'Comment %d was imported with parent %d, but could not be found', 'openlab-portfolio' ),
 						$comment_id,
 						$parent_id
 					) );
@@ -1924,11 +1911,11 @@ class Importer {
 					$data['user_id'] = $this->mapping['user'][ $author_id ];
 				} else {
 					$this->logger->warning( sprintf(
-						__( 'Could not find the author for comment #%d', 'wordpress-importer' ),
+						__( 'Could not find the author for comment #%d', 'openlab-portfolio' ),
 						$comment_id
 					) );
 					$this->logger->debug( sprintf(
-						__( 'Comment %d was imported with author %d, but could not be found', 'wordpress-importer' ),
+						__( 'Comment %d was imported with author %d, but could not be found', 'openlab-portfolio' ),
 						$comment_id,
 						$author_id
 					) );
@@ -1945,7 +1932,7 @@ class Importer {
 			$result = wp_update_comment( wp_slash( $data ) );
 			if ( empty( $result ) ) {
 				$this->logger->warning( sprintf(
-					__( 'Could not update comment #%d with mapped data', 'wordpress-importer' ),
+					__( 'Could not update comment #%d with mapped data', 'openlab-portfolio' ),
 					$comment_id
 				) );
 				continue;

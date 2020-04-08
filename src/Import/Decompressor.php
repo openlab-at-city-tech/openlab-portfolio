@@ -59,7 +59,7 @@ class Decompressor {
 		if ( ! $zip->open( $this->archive ) ) {
 			return new WP_Error(
 				'ol.importer.archive',
-				'Unable to extract export file.'
+				__( 'Unable to extract export file.', 'openlab-portfolio' )
 			);
 		}
 

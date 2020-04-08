@@ -34,8 +34,8 @@ class Service implements Registerable {
 
 		add_submenu_page(
 			'tools.php',
-			'Export Portfolio',
-			'Export Portfolio',
+			__( 'Export Portfolio', 'openlab-portfolio' ),
+			__( 'Export Portfolio', 'openlab-portfolio' ),
 			'export',
 			'export_portfolio',
 			[ $this, 'render' ]

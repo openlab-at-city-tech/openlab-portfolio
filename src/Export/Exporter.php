@@ -79,7 +79,10 @@ class Exporter {
 	 */
 	protected function create_dest() {
 		if ( ! wp_mkdir_p( $this->exports_dir ) ) {
-			return new WP_Error( 'ol.exporter.create.dest', 'Unable to create export folder.' );
+			return new WP_Error(
+				'ol.exporter.create.dest',
+				__( 'Unable to create export folder.', 'openlab-portfolio' )
+			);
 		}
 
 		return true;
@@ -96,14 +99,14 @@ class Exporter {
 		if ( ! is_dir( $folder ) ) {
 			return new WP_Error(
 				'ol.exporter.prepare.files',
-				sprintf( 'Folder %s does not exist.', $folder )
+				sprintf( __( 'Folder %s does not exist.', 'openlab-portfolio' ), $folder )
 			);
 		}
 
 		if ( ! is_readable( $folder ) ) {
 			return new WP_Error(
 				'ol.exporter.prepare.files',
-				sprintf( 'Folder %s is not readable.', $folder )
+				sprintf( __( 'Folder %s is not readable.', 'openlab-portfolio' ), $folder )
 			);
 		}
 
@@ -116,7 +119,7 @@ class Exporter {
 		} catch ( UnexpectedValueException $e ) {
 			return new WP_Error(
 				'ol.exporter.prepare.files',
-				sprintf( 'Could not open path: %', $e->getMessage() )
+				sprintf( __( 'Could not open path: %', 'openlab-portfolio' ), $e->getMessage() )
 			);
 		}
 	}
@@ -132,7 +135,7 @@ class Exporter {
 		if ( ! $wxp->create() ) {
 			return new WP_Error(
 				'ol.exporter.create.wxp',
-				'Unable to create WXP export file.'
+				__( 'Unable to create WXP export file.', 'openlab-portfolio' )
 			);
 		}
 
@@ -148,7 +151,7 @@ class Exporter {
 		if ( ! class_exists( 'ZipArchive' ) ) {
 			return new WP_Error(
 				'ol.exporter.archive',
-				'Unable to generate export file. ZipArchive not available.'
+				__( 'Unable to generate export file. ZipArchive not available.', 'openlab-portfolio' )
 			);
 		}
 
@@ -163,7 +166,7 @@ class Exporter {
 		if ( true !== $zip->open( $archive_pathname, ZipArchive::CREATE ) ) {
 			return new WP_Error(
 				'ol.exporter.archive',
-				'Unable to add data to export file.'
+				__( 'Unable to add data to export file.', 'openlab-portfolio' )
 			);
 		}
 

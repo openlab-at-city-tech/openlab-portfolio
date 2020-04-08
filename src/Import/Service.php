@@ -43,8 +43,8 @@ class Service implements Registerable {
 
 		add_submenu_page(
 			'tools.php',
-			'Import Portfolio',
-			'Import Portfolio',
+			__( 'Import Portfolio', 'openlab-portfolio' ),
+			__( 'Import Portfolio', 'openlab-portfolio' ),
 			'import',
 			'import_portfolio',
 			[ $this, 'render' ]
@@ -103,8 +103,8 @@ class Service implements Registerable {
 		$script_data = [
 			'url' => add_query_arg( urlencode_deep( $args ), admin_url( 'admin-ajax.php' ) ),
 			'strings' => [
-				'complete' => 'Step 3: Import Complete. Check out your site!',
-				'error'    => 'Import unsuccessful. <a href="https://openlab.citytech.cuny.edu/blog/help/contact-us/">Contact the OpenLab team</a> for support.',
+				'complete' => __( 'Step 3: Import Complete. Check out your site!', 'openlab-portfolio' ),
+				'error'    => __( 'Import unsuccessful. <a href="https://openlab.citytech.cuny.edu/blog/help/contact-us/">Contact the OpenLab team</a> for support.', 'openlab-portfolio' )
 			],
 		];
 
@@ -179,7 +179,11 @@ class Service implements Registerable {
 		$args = wp_unslash( $_POST );
 		if ( ! isset( $args['import_id'] ) ) {
 			// Missing import ID.
-			$error = new WP_Error( 'ol.portfolio.import.missing_id', 'Missing import file ID from request.' );
+			$error = new WP_Error(
+				'ol.portfolio.import.missing_id',
+				__( 'Missing import file ID from request.', 'openlab-portfolio' )
+			);
+
 			$this->display_error( $error );
 			return;
 		}
