@@ -347,7 +347,7 @@ class Service implements Registerable {
 
 		add_meta_box(
 			'ol-portfolio-citation',
-			'Citation',
+			__( 'Citation', 'openlab-portfolio' ),
 			[ $this, 'render_citation_meta' ],
 			[ 'post', 'page' ],
 			'normal'
@@ -355,7 +355,7 @@ class Service implements Registerable {
 
 		add_meta_box(
 			'ol-portfolio-annotation',
-			'Annotation',
+			__( 'Annotation', 'openlab-portfolio' ),
 			[ $this, 'render_annotation_meta' ],
 			[ 'post', 'page' ],
 			'normal'

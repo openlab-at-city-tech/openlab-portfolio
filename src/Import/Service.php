@@ -104,7 +104,7 @@ class Service implements Registerable {
 			'url' => add_query_arg( urlencode_deep( $args ), admin_url( 'admin-ajax.php' ) ),
 			'strings' => [
 				'complete' => __( 'Step 3: Import Complete. Check out your site!', 'openlab-portfolio' ),
-				'error'    => __( 'Import unsuccessful. <a href="https://openlab.citytech.cuny.edu/blog/help/contact-us/">Contact the OpenLab team</a> for support.', 'openlab-portfolio' )
+				'error'    => __( 'Import unsuccessful. Contact network admin for support.', 'openlab-portfolio' )
 			],
 		];
 
