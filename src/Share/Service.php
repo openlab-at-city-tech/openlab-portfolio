@@ -153,14 +153,14 @@ class Service implements Registerable {
 			'add-to-portfolio-styles',
 			plugins_url( 'assets/css/share.css', ROOT_FILE ),
 			[],
-			'20191105'
+			cboxol_get_asset_version()
 		);
 
 		wp_enqueue_script(
 			'add-to-portfolio',
 			plugins_url( 'assets/js/share.js', ROOT_FILE ),
 			[ 'a11y-dialog', 'wp-util' ],
-			'20191118',
+			cboxol_get_asset_version(),
 			true
 		);
 
@@ -307,14 +307,14 @@ class Service implements Registerable {
 			'entry-source-styles',
 			plugins_url( 'assets/css/portfolio.css', ROOT_FILE ),
 			[],
-			'20190727'
+			cboxol_get_asset_version()
 		);
 
 		wp_enqueue_script(
 			'show-more',
 			plugins_url( 'assets/js/show-more.js', ROOT_FILE ),
 			[ 'jquery' ],
-			'20190727',
+			cboxol_get_asset_version(),
 			true
 		);
 	}

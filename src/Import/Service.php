@@ -88,7 +88,7 @@ class Service implements Registerable {
 			'ol-portfolio-import-styles',
 			plugins_url( 'assets/css/import.css', ROOT_FILE ),
 			[],
-			'20190808'
+			cboxol_get_asset_version()
 		);
 
 		if ( $step !== static::STEP_IMPORT ) {
@@ -108,8 +108,13 @@ class Service implements Registerable {
 			],
 		];
 
-		$url = plugins_url( 'assets/js/import.js', ROOT_FILE );
-		wp_enqueue_script( 'ol-portfolio-import', $url, [ 'jquery' ], '20190723', true );
+		wp_enqueue_script(
+			'ol-portfolio-import',
+			plugins_url( 'assets/js/import.js', ROOT_FILE ),
+			[ 'jquery' ],
+			cboxol_get_asset_version(),
+			true
+		);
 		wp_localize_script( 'ol-portfolio-import', 'ImportData', $script_data );
 	}
 
