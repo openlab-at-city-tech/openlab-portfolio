@@ -84,18 +84,12 @@ class Service implements Registerable {
 	 * @return void
 	 */
 	public function init() {
-		$type = cboxol_get_group_site_type( get_current_blog_id() );
+		$group_id = cboxol_get_group_site_id( get_current_blog_id() );
 
-		switch ( $type ) {
-			case 'club':
-			case 'course':
-			case 'project':
-					$this->source_init();
-					break;
-
-			case 'portfolio':
-					$this->portfolio_init();
-					break;
+		if ( cboxol_is_portfolio( $group_id ) ) {
+			$this->portfolio_init();
+		} else {
+			$this->source_init();
 		}
 	}
 
