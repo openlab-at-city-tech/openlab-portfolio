@@ -35,9 +35,9 @@ class Service implements Registerable {
 	 * @return void
 	 */
 	public function register_page() {
-		$type = cboxol_get_group_site_type( get_current_blog_id() );
+		$group_id = cboxol_get_group_site_id( get_current_blog_id() );
 
-		if ( 'portfolio' !== $type ) {
+		if ( ! cboxol_is_portfolio( $group_id ) ) {
 			return;
 		}
 
