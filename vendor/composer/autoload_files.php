@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    '02f2f1eb23102b79025ec84ad1c4bee3' => $baseDir . '/src/polyfills.php',
     'a2bb5fd4cb9bceefb44ebec5edc18194' => $baseDir . '/src/helpers.php',
 );

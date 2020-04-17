@@ -11,6 +11,7 @@
       "OpenLab\\Portfolio\\": "src"
     },
     "files": [
+      "src/polyfills.php",
       "src/helpers.php"
     ]
   },

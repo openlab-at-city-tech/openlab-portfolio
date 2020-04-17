@@ -13,6 +13,7 @@
 
 namespace OpenLab\Portfolio;
 
+const VERSION   = '1.0.0';
 const ROOT_DIR  = __DIR__;
 const ROOT_FILE = __FILE__;
 
