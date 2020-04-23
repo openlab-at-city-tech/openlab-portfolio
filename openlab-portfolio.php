@@ -18,11 +18,13 @@ const ROOT_DIR  = __DIR__;
 const ROOT_FILE = __FILE__;
 
 if ( file_exists( ROOT_DIR . '/vendor/autoload.php' ) ) {
-	require ROOT_DIR . '/vendor/autoload.php';
+	add_action( 'plugins_loaded', function() {
+		require ROOT_DIR . '/vendor/autoload.php';
+
+		Portfolio::create();
+	}, 15 );
 
 	add_action( 'init', function() {
 		load_plugin_textdomain( 'openlab-portfolio' );
 	} );
-
-	Portfolio::create();
 }
