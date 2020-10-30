@@ -32,6 +32,9 @@ class Service implements Registerable {
 		add_action( 'template_redirect', [ $this, 'init' ] );
 		add_action( 'add_meta_boxes', [ $this, 'meta_boxes' ], 10, 2 );
 		add_action( 'save_post', [ $this, 'save_meta' ] );
+
+		add_action( 'bp_after_group_settings_admin', [ $this, 'render_group_settings' ] );
+		add_action( 'groups_group_after_save', [ $this, 'save_group_settings' ] );
 	}
 
 	/**
@@ -405,5 +408,46 @@ class Service implements Registerable {
 
 		extract( [ 'data' => $annotation ], EXTR_SKIP );
 		include ROOT_DIR . '/views/share/meta/annotation.php';
+	}
+
+	/**
+	 * Renders "Add to My Portfolio" group settings panel.
+	 *
+	 * @return void
+	 */
+	public function render_group_settings() {
+		$group_id = openlab_fallback_group();
+
+		if ( ! cboxol_is_portfolio( $group_id ) ) {
+			return;
+		}
+
+		$data = [
+			'enabled'    => groups_get_groupmeta( $group_id, 'enable_portfolio_sharing' ),
+			'group_type' => cboxol_get_group_group_type( $group_id ),
+		];
+
+		extract( $data, EXTR_SKIP );
+		include ROOT_DIR . '/views/share/group-settings.php';
+	}
+
+	/**
+	 * Save "Add to My Portfolio" group settings.
+	 *
+	 * @param object $group Current group object.
+	 * @return void
+	 */
+	public function save_group_settings( $group ) {
+		if ( empty( $_POST['add-to-portfolio-toggle-nonce'] ) ) {
+			return;
+		}
+	
+		check_admin_referer( 'add_to_portfolio_toggle', 'add-to-portfolio-toggle-nonce' );
+	
+		if ( ! empty( $_POST['portfolio-sharing'] ) ) {
+			groups_add_groupmeta( $group->id, 'enable_portfolio_sharing', 'yes' );
+		} else {
+			groups_delete_groupmeta( $group->id, 'enable_portfolio_sharing' );
+		}
 	}
 }
