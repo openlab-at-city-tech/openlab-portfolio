@@ -416,7 +416,7 @@ class Service implements Registerable {
 	 * @return void
 	 */
 	public function render_group_settings() {
-		$group_id = openlab_fallback_group();
+		$group_id = bp_get_current_group_id();
 
 		if ( ! cboxol_is_portfolio( $group_id ) ) {
 			return;
