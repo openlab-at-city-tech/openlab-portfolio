@@ -172,6 +172,9 @@ class Service implements Registerable {
 			'portfolioRoot'  => esc_url_raw( get_rest_url( $this->portfolio_id ) ),
 			'portfolioAdmin' => esc_url_raw( get_admin_url( $this->portfolio_id ) ),
 			'nonce'          => wp_create_nonce( 'wp_rest' ),
+			'strings'        => [
+				'addedToMyPortfolio' => openlab_portfolio_get_label( 'added_to_my_portfolio' ),
+			],
 		];
 
 		wp_localize_script( 'add-to-portfolio', 'portfolioSettings', $settings );
@@ -441,9 +444,9 @@ class Service implements Registerable {
 		if ( empty( $_POST['add-to-portfolio-toggle-nonce'] ) ) {
 			return;
 		}
-	
+
 		check_admin_referer( 'add_to_portfolio_toggle', 'add-to-portfolio-toggle-nonce' );
-	
+
 		if ( ! empty( $_POST['portfolio-sharing'] ) ) {
 			groups_add_groupmeta( $group->id, 'enable_portfolio_sharing', 'yes' );
 		} else {

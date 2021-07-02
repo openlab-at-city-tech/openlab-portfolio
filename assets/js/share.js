@@ -159,7 +159,7 @@
 		// Create new edit link element.
 		var editLink = $( '<a />' )
 			.attr( 'href', editUrl )
-			.text( 'Added to my Portfolio' );
+			.text( app.settings.strings.addedToMyPortfolio );
 
 		$( '.portfolio-actions-' + entry.id )
 			.find( 'button' )

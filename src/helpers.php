@@ -23,3 +23,36 @@ if ( ! function_exists( 'openlab_get_filesystem' ) ) {
 		return $wp_filesystem;
 	}
 }
+
+/**
+ * Gets a button label.
+ *
+ * We use this function to allow other plugins, such as cbox-openlab-core, to
+ * filter the user-facing strings.
+ *
+ * @param string $type Type of the label.
+ * @return string
+ */
+function openlab_portfolio_get_label( $type ) {
+	switch ( $type ) {
+		case 'add_to_portfolio':
+			$label = __( 'Add to Portfolio', 'openlab-portfolio' );
+		break;
+
+		case 'added_to_my_portfolio':
+			$label = __( 'Added to my Portfolio', 'openlab-portfolio' );
+		break;
+
+		default:
+			$label = '';
+		break;
+	}
+
+	/**
+	 * Filters the label.
+	 *
+	 * @param string $label
+	 * @param string $type
+	 */
+	return apply_filters( 'openlab_portfolio_get_label', $label, $type );
+}

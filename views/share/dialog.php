@@ -2,7 +2,7 @@
 	<div class="dialog__overlay" tabindex="-1" data-a11y-dialog-hide"></div>
 	<dialog class="dialog__content" aria-labelledby="dialog-title" role="dialog">
 		<div class="dialog__header">
-			<h1 id="dialog-title"><?php esc_html_e( 'Add to Portfolio', 'openlab-portfolio' ); ?></h1>
+			<h1 id="dialog-title"><?php echo esc_html( openlab_portfolio_get_label( 'add_to_portfolio' ) ); ?></h1>
 			<button data-a11y-dialog-hide class="dialog__close" aria-label="<?php esc_attr_e( 'Close this dialog window', 'openlab-portfolio' ); ?>">×</button>
 		</div>
 		<div class="dialog__body"><?php esc_html_e( 'Loading...', 'openlab-portfolio' ); ?></div>
@@ -11,7 +11,7 @@
 				<?php esc_html_e( 'Cancel','openlab-portfolio' ); ?>
 			</button>
 			<button type="button" class="btn btn-primary">
-				<?php esc_html_e( 'Add to Portfolio', 'openlab-portfolio' ); ?>
+				<?php echo esc_html( openlab_portfolio_get_label( 'add_to_portfolio' ) ); ?>
 			</button>
 		</div>
 	</dialog>
