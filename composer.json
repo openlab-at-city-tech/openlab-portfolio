@@ -1,6 +1,6 @@
 {
-  "name": "openlab/portfolio",
-  "description": "OpneLab ePortolio feature",
+  "name": "openlab-at-city-tech/openlab-portfolio",
+  "description": "OpenLab ePortolio feature",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
   "require": {
