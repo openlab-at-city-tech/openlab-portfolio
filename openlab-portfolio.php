@@ -19,6 +19,11 @@ const ROOT_FILE = __FILE__;
 
 if ( file_exists( ROOT_DIR . '/vendor/autoload.php' ) ) {
 	add_action( 'plugins_loaded', function() {
+		// Abort if commons-in-a-box is not active.
+		if ( ! function_exists( 'cbox_is_main_site' ) ) {
+			return;
+		}
+
 		require ROOT_DIR . '/vendor/autoload.php';
 
 		Portfolio::create();
