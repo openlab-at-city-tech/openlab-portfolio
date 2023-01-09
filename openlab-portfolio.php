@@ -5,7 +5,7 @@
  * Author:      OpenLab
  * Author URI:  http://openlab.citytech.cuny.edu
  * Plugin URI:  http://openlab.citytech.cuny.edu
- * Version:     1.1.0
+ * Version:     1.1.1
  * License:     GPL-2.0-or-later
  * Text Domain: openlab-portfolio
  * Domain Path: /languages
@@ -13,7 +13,7 @@
 
 namespace OpenLab\Portfolio;
 
-const VERSION   = '1.1.0';
+const VERSION   = '1.1.1';
 const ROOT_DIR  = __DIR__;
 const ROOT_FILE = __FILE__;
 
