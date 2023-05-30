@@ -38,7 +38,7 @@
 		</div>
 		<div class="form-group">
 			<label for="citation"><?php esc_html_e( 'Citation', 'openlab-portfolio' ); ?></label>
-			<div id="citation"><?php echo wp_kses_post( 'This <a href="{{ data.url }}">entry</a> was originaly posted in "{{ data.site_name }}" on {{ data.date }}', 'openlab-portfolio' ); ?></div>
+			<div id="citation"><?php echo wp_kses_post( 'This <a href="{{ data.url }}">entry</a> was originally posted in "{{ data.site_name }}" on {{ data.date }}', 'openlab-portfolio' ); ?></div>
 		</div>
 		<div class="form-group">
 			<label for="annotation"><?php esc_html_e( 'Annotation', 'openlab-portfolio' ); ?></label>
