@@ -34,7 +34,9 @@ class Service implements Registerable {
 		add_action( 'save_post', [ $this, 'save_meta' ] );
 
 		add_action( 'bp_after_group_settings_admin', [ $this, 'render_group_settings' ] );
+		add_action( 'openlab_group_creation_after_group_site_settings', [ $this, 'render_group_settings' ] );
 		add_action( 'groups_group_after_save', [ $this, 'save_group_settings' ] );
+		add_action( 'groups_create_group_step_save_site-details', [ $this, 'save_group_settings' ], 20 );
 	}
 
 	/**
@@ -425,8 +427,10 @@ class Service implements Registerable {
 			return;
 		}
 
+		$enabled = bp_is_group_create() ? 'yes' : groups_get_groupmeta( $group_id, 'enable_portfolio_sharing' );
+
 		$data = [
-			'enabled'    => groups_get_groupmeta( $group_id, 'enable_portfolio_sharing' ),
+			'enabled'    => $enabled,
 			'group_type' => cboxol_get_group_group_type( $group_id ),
 		];
 
@@ -440,9 +444,13 @@ class Service implements Registerable {
 	 * @param object $group Current group object.
 	 * @return void
 	 */
-	public function save_group_settings( $group ) {
+	public function save_group_settings( $group = null ) {
 		if ( empty( $_POST['add-to-portfolio-toggle-nonce'] ) ) {
 			return;
+		}
+
+		if ( ! $group ) {
+			$group = groups_get_current_group();
 		}
 
 		check_admin_referer( 'add_to_portfolio_toggle', 'add-to-portfolio-toggle-nonce' );
